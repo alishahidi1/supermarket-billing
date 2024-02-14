@@ -357,6 +357,10 @@ void shopping::receipt(){
     }
     cout<<"\n\n__________________________________________"<<endl;
     cout<<"\n Total Amount: "<<total<<endl;
+}
 
+int main(){
+    shopping s;
+    s.menu();
 }
 
