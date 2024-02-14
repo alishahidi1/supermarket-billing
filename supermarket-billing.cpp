@@ -292,3 +292,71 @@ void shopping::list(){
     }
     data.close();
 }
+
+void shopping::receipt(){
+    fstream data;
+
+    int arrc[100];
+    int arrq[100];
+    char choice;
+    int c=0;
+    float amount = 0;
+    float dis = 0;
+    float total = 0;
+
+    cout<<"\n\n\t\t\t\t RECEIPT ";
+    data.open("database.txt", ios::in);
+
+    if(!data){
+        cout<<"\n\n Empty database!";
+    }
+    else{
+        data.close();
+
+        list();
+        cout<<"\n_____________________________________\n";
+        cout<<"\n|                                   |\n";
+        cout<<"\n       Please place the order       |\n";
+        cout<<"\n|                                   |\n";
+        cout<<"\n_____________________________________\n";
+
+        do {
+            m:
+            cout<<"\n Enter th product code: ";
+            cin>>arrc[c];
+            cout<<"\n Enter the product quantity: ";
+            cin>>arrq[c];
+            for(int i = 0; i < c; i++){
+                if(arrc[c] == arrc[i]){
+                    cout<<"\n\n Duplicate product code. Please try again!";
+                    goto m;
+                }
+            }
+            c++;
+            cout<<"\n\n Do you wantto buy another product?(y/n)";
+            cin >> choice; 
+        }
+        while(choice == 'y');
+        cout<<"\n\n\t\t\t___________________RECEIPT_____________________\n";
+        cout<<"\n Product No\t Product Name\t Product Quantity\t Price\t Amount\t Discounted"<<endl;
+
+        for(int i = 0; i < c; i++){
+            data.open("database.txt", ios::in);
+            data>>pcode>>pname>>price>>dis;
+            while(!data.eof()){
+                if(pcode == arrc[i]){
+                    amount = price * arrq[i];
+                    dis = amount - (amount * dis / 100);
+                    total += dis;
+                    cout<<"\n"<<pcode<<"\t\t"<<pname<<"\t\t"<<arrq[i]<<"\t\t"<<price<<"\t\t"<<amount<<"\t\t"<<dis<<endl;
+                }
+                data>>pcode>>pname>>price>>dis;
+            }
+        }
+        data.close();
+    }
+    cout<<"\n\n__________________________________________"<<endl;
+    cout<<"\n Total Amount: "<<total<<endl;
+
+}
+
