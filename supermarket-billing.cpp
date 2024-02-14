@@ -108,3 +108,27 @@ void shopping::administrator(){
     }
     goto m;
 }
+
+void shopping::buyer(){
+    int choice;
+    m:
+    cout<<"\t\t\t   Buyer \n";
+    cout<<"\t\t\t   1)Buy product \n";
+    cout<<"\t\t\t   2)Go back \n";
+    cout<<"\t\t\t Enter your choice: ";
+    cin>>choice;
+
+    switch(choice){
+        case 1:
+            receipt();
+            break;
+        
+        case 2:
+            menu();
+        
+        default:
+            cout<<"Invalid choice!";
+
+    }
+    goto m;
+}
