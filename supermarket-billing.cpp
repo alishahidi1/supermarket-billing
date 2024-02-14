@@ -278,7 +278,9 @@ void shopping::rem(){
 
 void shopping::list(){
     fstream data;
+
     data.open("database.txt", ios::in);
+
     cout<<"\n\n|________________________________________|\n";
     cout<<"ProNo\t\tName\t\tPrice\n";
     cout<<"\n\n|________________________________________|\n";
